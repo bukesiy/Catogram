@@ -7,12 +7,9 @@ import org.telegram.messenger.R
 import org.telegram.messenger.SharedConfig
 import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
-import ua.itaysonlab.catogram.CGControversive
 import ua.itaysonlab.catogram.CGFeatureHooks
-import ua.itaysonlab.catogram.CGFeatureHooks.getReplyIconDrawable
 import ua.itaysonlab.catogram.CatogramConfig
 import ua.itaysonlab.catogram.preferences.ktx.*
-import ua.itaysonlab.extras.IconExtras
 import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference.TGSLContract
 
 class ChatsPreferencesEntry : BasePreferencesEntry {
@@ -386,6 +383,68 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     return@contract CatogramConfig.profiles_alwaysExpand
                 }) {
                     CatogramConfig.profiles_alwaysExpand = it
+                }
+            }
+        }
+        category(LocaleController.getString("CG_Tr", R.string.CG_Tr)) {
+            list {
+                title = LocaleController.getString("CG_TrLang", R.string.CG_TrLang)
+
+                contract({
+                    return@contract listOf(
+                            Pair(0, "en"),
+                            Pair(1, "ru"),
+                            Pair(2, "fr"),
+                            Pair(3, "it"),
+                            Pair(4, "es"),
+                            Pair(5, "zh"),
+                            Pair(6, "ja"),
+                            Pair(7, "hi"),
+                            Pair(8, "de"),
+                    )
+                }, {
+                    return@contract when (CatogramConfig.translateOptions) {
+                        1 -> "ru"
+                        2 -> "fr"
+                        3 -> "it"
+                        4 -> "es"
+                        5 -> "zh"
+                        6 -> "ja"
+                        7 -> "hi"
+                        8 -> "de"
+                        else -> "en"
+                    }
+                }) {
+                    CatogramConfig.translateOptions = it
+                    when (CatogramConfig.translateOptions) {
+                        0 -> {
+                            CatogramConfig.trLang = "en"
+                        }
+                        1 -> {
+                            CatogramConfig.trLang = "ru"
+                        }
+                        2 -> {
+                            CatogramConfig.trLang = "fr"
+                        }
+                        3 -> {
+                            CatogramConfig.trLang = "it"
+                        }
+                        4 -> {
+                            CatogramConfig.trLang = "es"
+                        }
+                        5 -> {
+                            CatogramConfig.trLang = "zh"
+                        }
+                        6 -> {
+                            CatogramConfig.trLang = "ja"
+                        }
+                        7 -> {
+                            CatogramConfig.trLang = "hi"
+                        }
+                        8 -> {
+                            CatogramConfig.trLang = "de"
+                        }
+                    }
                 }
             }
         }

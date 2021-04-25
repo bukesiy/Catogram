@@ -42,8 +42,6 @@ import android.widget.Toast;
 import androidx.annotation.UiThread;
 import androidx.core.view.inputmethod.InputContentInfoCompat;
 
-import com.google.android.exoplayer2.util.Log;
-
 import org.telegram.messenger.audioinfo.AudioInfo;
 import org.telegram.messenger.support.SparseLongArray;
 import org.telegram.tgnet.ConnectionsManager;
@@ -60,10 +58,8 @@ import org.telegram.ui.ChatActivity;
 import org.telegram.ui.Components.AlertsCreator;
 import org.telegram.ui.Components.AnimatedFileDrawable;
 import org.telegram.ui.Components.Bulletin;
-import org.telegram.ui.Components.BulletinFactory;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.Point;
-import org.telegram.ui.TooManyCommunitiesActivity;
 import org.telegram.ui.TwoStepVerificationActivity;
 import org.telegram.ui.TwoStepVerificationSetupActivity;
 
@@ -72,7 +68,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -184,7 +179,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                     double coef = 0.01;
                     estimatedUploadSpeed = coef * uploadSpeed + (1 - coef) * estimatedUploadSpeed;
                 }
-                timeUntilFinish = (int) ((totalSize - uploadedSize) * 1000 / (double) estimatedUploadSpeed);
+                timeUntilFinish = (int) ((totalSize - uploadedSize) * 1000 / estimatedUploadSpeed);
                 lastUploadSize = uploadedSize;
                 lastUploadTime = newTime;
             }
@@ -2478,7 +2473,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
             if (response != null) {
                 if (response instanceof TLRPC.TL_urlAuthResultRequest) {
                     TLRPC.TL_urlAuthResultRequest res = (TLRPC.TL_urlAuthResultRequest) response;
-                    parentFragment.showRequestUrlAlert(res, (TLRPC.TL_messages_requestUrlAuth) req, url, ask);
+                    parentFragment.showRequestUrlAlert(res, req, url, ask);
                 } else if (response instanceof TLRPC.TL_urlAuthResultAccepted) {
                     TLRPC.TL_urlAuthResultAccepted res = (TLRPC.TL_urlAuthResultAccepted) response;
                     AlertsCreator.showOpenUrlAlert(parentFragment, res.url, false, false);
@@ -2744,7 +2739,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                 req.msg_id = messageObject.getId();
                 req.game = button instanceof TLRPC.TL_keyboardButtonGame;
                 if (button.requires_password) {
-                    req.password = req.password = srp != null ? srp : new TLRPC.TL_inputCheckPasswordEmpty();;
+                    req.password = req.password = srp != null ? srp : new TLRPC.TL_inputCheckPasswordEmpty();
                     req.flags |= 4;
                 }
                 if (button.data != null) {
@@ -4928,7 +4923,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
             if (check) {
                 DelayedMessage maxDelayedMessage = findMaxDelayedMessageForMessageId(msgObj.getId(), msgObj.getDialogId());
                 if (maxDelayedMessage != null) {
-                    maxDelayedMessage.addDelayedRequest(req, msgObj, originalPath, parentObject, delayedMessage, parentMessage != null ? parentMessage.scheduled : false);
+                    maxDelayedMessage.addDelayedRequest(req, msgObj, originalPath, parentObject, delayedMessage, parentMessage != null && parentMessage.scheduled);
                     if (parentMessage != null && parentMessage.requests != null) {
                         maxDelayedMessage.requests.addAll(parentMessage.requests);
                     }
@@ -6263,7 +6258,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                                 case "video": {
                                     fileName.file_name = "video.mp4";
                                     TLRPC.TL_documentAttributeVideo attributeVideo = new TLRPC.TL_documentAttributeVideo();
-                                    int wh[] = MessageObject.getInlineResultWidthAndHeight(result);
+                                    int[] wh = MessageObject.getInlineResultWidthAndHeight(result);
                                     attributeVideo.w = wh[0];
                                     attributeVideo.h = wh[1];
                                     attributeVideo.duration = MessageObject.getInlineResultDuration(result);
@@ -6293,7 +6288,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                                     attributeSticker.stickerset = new TLRPC.TL_inputStickerSetEmpty();
                                     document.attributes.add(attributeSticker);
                                     TLRPC.TL_documentAttributeImageSize attributeImageSize = new TLRPC.TL_documentAttributeImageSize();
-                                    int wh[] = MessageObject.getInlineResultWidthAndHeight(result);
+                                    int[] wh = MessageObject.getInlineResultWidthAndHeight(result);
                                     attributeImageSize.w = wh[0];
                                     attributeImageSize.h = wh[1];
                                     document.attributes.add(attributeImageSize);
@@ -6325,7 +6320,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                             }
                             if (document.thumbs.isEmpty()) {
                                 TLRPC.PhotoSize thumb = new TLRPC.TL_photoSize();
-                                int wh[] = MessageObject.getInlineResultWidthAndHeight(result);
+                                int[] wh = MessageObject.getInlineResultWidthAndHeight(result);
                                 thumb.w = wh[0];
                                 thumb.h = wh[1];
                                 thumb.size = 0;
@@ -6346,7 +6341,7 @@ public class SendMessagesHelper extends BaseController implements NotificationCe
                                 photo.date = accountInstance.getConnectionsManager().getCurrentTime();
                                 photo.file_reference = new byte[0];
                                 TLRPC.TL_photoSize photoSize = new TLRPC.TL_photoSize();
-                                int wh[] = MessageObject.getInlineResultWidthAndHeight(result);
+                                int[] wh = MessageObject.getInlineResultWidthAndHeight(result);
                                 photoSize.w = wh[0];
                                 photoSize.h = wh[1];
                                 photoSize.size = 1;

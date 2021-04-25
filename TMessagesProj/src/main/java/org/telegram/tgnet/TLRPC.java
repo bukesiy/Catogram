@@ -9,15 +9,11 @@
 package org.telegram.tgnet;
 
 import android.text.TextUtils;
-import android.util.Log;
 
-import org.telegram.messenger.FileLoader;
-import org.telegram.messenger.FileLog;
 import org.telegram.messenger.Utilities;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import ua.itaysonlab.catogram.tabs.TabIconManager;
@@ -46642,13 +46638,13 @@ public class TLRPC {
 					attachPath = stream.readString(false);
 					if (attachPath != null) {
                         if ((id < 0 || send_state == 3 || legacy) && attachPath.startsWith("||")) {
-                            String args[] = attachPath.split("\\|\\|");
+                            String[] args = attachPath.split("\\|\\|");
                             if (args.length > 0) {
                                 if (params == null) {
                                     params = new HashMap<>();
                                 }
                                 for (int a = 1; a < args.length - 1; a++) {
-                                    String args2[] = args[a].split("\\|=\\|");
+                                    String[] args2 = args[a].split("\\|=\\|");
                                     if (args2.length == 2) {
                                         params.put(args2[0], args2[1]);
                                     }

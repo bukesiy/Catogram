@@ -25,13 +25,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import androidx.annotation.Nullable;
-
 import android.os.SystemClock;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -154,9 +154,7 @@ public class VoIPService extends VoIPBaseService {
 		if (call != null) {
 			int selfId = getSelfId();
 			TLRPC.TL_groupCallParticipant participant = call.participants.get(selfId);
-			if (participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(chat)) {
-				return true;
-			}
+            return participant != null && !participant.can_self_unmute && participant.muted && !ChatObject.canManageCalls(chat);
 		}
 		return false;
 	}

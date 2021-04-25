@@ -40,7 +40,6 @@ import org.telegram.ui.Components.CombinedDrawable;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RecyclerListView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,7 +48,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -505,9 +503,7 @@ public class FiltersView extends RecyclerListView {
 
     private static boolean validDateForMont(int day, int month) {
         if (month >= 0 && month < 12) {
-            if (day >= 0 && day < numberOfDaysEachMonth[month]) {
-                return true;
-            }
+            return day >= 0 && day < numberOfDaysEachMonth[month];
         }
         return false;
     }
@@ -782,10 +778,7 @@ public class FiltersView extends RecyclerListView {
             if (filterType == filterData.filterType) {
                 return true;
             }
-            if (isMedia() && filterData.isMedia()) {
-                return true;
-            }
-            return false;
+            return isMedia() && filterData.isMedia();
         }
 
         public boolean isMedia() {

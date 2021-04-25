@@ -89,10 +89,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 
-import androidx.core.view.ViewCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import ua.itaysonlab.catogram.CGFeatureHooks;
 import ua.itaysonlab.catogram.CatogramConfig;
 
@@ -1610,10 +1606,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
 
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
-            if (holder.getItemViewType() == 1) {
-                return false;
-            }
-            return true;
+            return holder.getItemViewType() != 1;
         }
 
         @Override
@@ -1942,10 +1935,7 @@ public class ShareAlert extends BottomSheet implements NotificationCenter.Notifi
 
         @Override
         public boolean isEnabled(RecyclerView.ViewHolder holder) {
-            if (holder.getItemViewType() == 1) {
-                return false;
-            }
-            return true;
+            return holder.getItemViewType() != 1;
         }
 
         @Override

@@ -26,7 +26,6 @@ import org.telegram.messenger.BuildVars;
 import org.telegram.messenger.CustomTabsCopyReceiver;
 import org.telegram.messenger.FileLog;
 import org.telegram.messenger.LocaleController;
-import org.telegram.messenger.MessagesController;
 import org.telegram.messenger.NotificationCenter;
 import org.telegram.messenger.R;
 import org.telegram.messenger.ShareBroadcastReceiver;
@@ -414,9 +413,7 @@ public class Browser {
                 return true;
             }
         } else if (all) {
-            if (host.endsWith("telegram.org") || host.endsWith("telegra.ph") || host.endsWith("telesco.pe")) {
-                return true;
-            }
+            return host.endsWith("telegram.org") || host.endsWith("telegra.ph") || host.endsWith("telesco.pe");
         }
         return false;
     }

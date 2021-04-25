@@ -33,13 +33,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.SystemClock;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -55,6 +48,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.messenger.ApplicationLoader;
@@ -1859,13 +1858,9 @@ public class ThemePreviewActivity extends BaseFragment implements DownloadContro
                 }
             }
             if (backupMyMessagesGradientAccentColor != 0) {
-                if (backupMyMessagesGradientAccentColor != accent.myMessagesGradientAccentColor) {
-                    return true;
-                }
+                return backupMyMessagesGradientAccentColor != accent.myMessagesGradientAccentColor;
             } else {
-                if (accent.myMessagesGradientAccentColor != 0) {
-                    return true;
-                }
+                return accent.myMessagesGradientAccentColor != 0;
             }
         }
         return false;

@@ -3,15 +3,11 @@ package ua.itaysonlab.extras;
 import android.graphics.Typeface;
 import android.os.Build;
 
-import org.telegram.messenger.AndroidUtilities;
-
-import ua.itaysonlab.catogram.CatogramConfig;
-
 public class CatogramFontLoader {
-    private static Typeface sysBold = Typeface.create(Typeface.DEFAULT, Typeface.BOLD);
-    private static Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
-    private static Typeface sysItalic = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC);
-    private static Typeface sysMono = Typeface.MONOSPACE;
+    private static final Typeface sysBold = Typeface.create(Typeface.DEFAULT, Typeface.BOLD);
+    private static final Typeface sysBoldItalic = Typeface.create(Typeface.DEFAULT, Typeface.BOLD_ITALIC);
+    private static final Typeface sysItalic = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC);
+    private static final Typeface sysMono = Typeface.MONOSPACE;
 
     public static boolean needRedirect(String path) {
         return (

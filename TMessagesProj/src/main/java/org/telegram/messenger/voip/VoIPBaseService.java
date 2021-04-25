@@ -96,7 +96,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import ua.itaysonlab.catogram.CGFeatureHooks;
-import ua.itaysonlab.catogram.CatogramConfig;
 
 /**
  * Created by grishka on 21.07.17.
@@ -1118,11 +1117,7 @@ public abstract class VoIPBaseService extends Service implements SensorEventList
 	}
 
 	public void onAudioFocusChange(int focusChange) {
-		if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-			hasAudioFocus = true;
-		} else {
-			hasAudioFocus = false;
-		}
+        hasAudioFocus = focusChange == AudioManager.AUDIOFOCUS_GAIN;
 	}
 
 	protected void updateBluetoothHeadsetState(boolean connected) {

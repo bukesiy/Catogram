@@ -102,6 +102,7 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 import javax.microedition.khronos.opengles.GL;
+
 import ua.itaysonlab.catogram.CatogramConfig;
 import ua.itaysonlab.catogram.voicerec.InstantVideoBridge;
 
@@ -488,11 +489,7 @@ public class InstantCameraView extends FrameLayout implements NotificationCenter
             textureOverlayView.setImageResource(R.drawable.icplaceholder);
         }
         cameraReady = false;
-        if (CatogramConfig.INSTANCE.getRearCam()) {
-            isFrontface = false;
-        } else {
-            isFrontface = true;
-        }
+        isFrontface = !CatogramConfig.INSTANCE.getRearCam();
         selectedCamera = null;
         recordedTime = 0;
         progress = 0;

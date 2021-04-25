@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 
 import org.telegram.messenger.AndroidUtilities;
 import org.telegram.ui.ActionBar.Theme;
-import org.telegram.ui.Cells.ThemePreviewMessagesCell;
 import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.SeekBarView;
 
@@ -17,12 +16,12 @@ import ua.itaysonlab.tgkit.preference.types.TGKitSliderPreference;
 
 public class StickerSliderCell extends FrameLayout {
     private TGKitSliderPreference.TGSLContract contract;
-    private SeekBarView sizeBar;
+    private final SeekBarView sizeBar;
 
     private int startRadius;
     private int endRadius;
 
-    private TextPaint textPaint;
+    private final TextPaint textPaint;
 
     public StickerSliderCell setContract(TGKitSliderPreference.TGSLContract contract) {
         this.contract = contract;

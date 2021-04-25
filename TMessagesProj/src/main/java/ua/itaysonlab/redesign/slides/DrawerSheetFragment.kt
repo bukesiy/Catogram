@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import org.telegram.messenger.*
 import org.telegram.ui.*
-import org.telegram.ui.ActionBar.BaseFragment
 import org.telegram.ui.ActionBar.Theme
 import ua.itaysonlab.extras.CatogramExtras
 import ua.itaysonlab.redesign.BaseActionedSwipeFragment
@@ -47,9 +46,9 @@ class DrawerSheetFragment: BaseActionedSwipeFragment() {
                 }))
             }
             "settings" -> {
-                val args = Bundle();
-                args.putInt("user_id", UserConfig.getInstance(UserConfig.selectedAccount).clientUserId);
-                args.putBoolean("expandPhoto", true);
+                val args = Bundle()
+                args.putInt("user_id", UserConfig.getInstance(UserConfig.selectedAccount).clientUserId)
+                args.putBoolean("expandPhoto", true)
                 (activity as LaunchActivity).presentFragment(ProfileActivity(args))
             }
         }

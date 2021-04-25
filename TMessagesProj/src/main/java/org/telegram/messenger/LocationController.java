@@ -44,8 +44,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import ua.itaysonlab.catogram.CGControversive;
-
 public class LocationController extends BaseController implements NotificationCenter.NotificationCenterDelegate, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private LongSparseArray<SharingLocationInfo> sharingLocationsMap = new LongSparseArray<>();
@@ -540,10 +538,7 @@ public class LocationController extends BaseController implements NotificationCe
         if (!shouldStopGps()) {
             return false;
         }
-        if (Math.abs(lastLocationSendTime - SystemClock.elapsedRealtime()) >= SEND_NEW_LOCATION_TIME) {
-            return true;
-        }
-        return false;
+        return Math.abs(lastLocationSendTime - SystemClock.elapsedRealtime()) >= SEND_NEW_LOCATION_TIME;
     }
 
     public void cleanup() {
