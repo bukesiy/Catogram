@@ -93,6 +93,8 @@ object CatogramConfig {
 
     var autoOta by sharedPreferences.boolean("cg_auto_ota", true)
 
+    var hqVoice by sharedPreferences.boolean("cg_hq_voice", true)
+
     var ghostMode = false
     //var ghostMode by sharedPreferences.boolean("cg_ghost_mode", defaultValue = false)
 

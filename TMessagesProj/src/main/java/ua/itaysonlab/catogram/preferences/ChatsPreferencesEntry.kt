@@ -79,7 +79,18 @@ class ChatsPreferencesEntry : BasePreferencesEntry {
                     CatogramConfig.enableProximity = it
                 }
             }
-            
+
+            switch {
+                title = LocaleController.getString("CG_HqVoice", R.string.CG_HqVoice)
+                summary = LocaleController.getString("CG_HqVoice_desc", R.string.CG_HqVoice_desc)
+
+                contract({
+                    return@contract CatogramConfig.hqVoice
+                }) {
+                    CatogramConfig.hqVoice = it
+                }
+            }
+
             switch {
                 title = LocaleController.getString("CG_HqRoundVideos", R.string.CG_HqRoundVideos)
 
